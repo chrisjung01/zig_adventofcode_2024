@@ -40,6 +40,7 @@ fn read_input() ![]const u8 {
     const file_contents = try file.readToEndAlloc(std.heap.page_allocator, 1024 * 1024);
     return file_contents;
 }
+
 fn compare_lists(left_list: std.ArrayList(i32), right_list: std.ArrayList(i32)) !i32 {
     var sum: i32 = 0;
 
