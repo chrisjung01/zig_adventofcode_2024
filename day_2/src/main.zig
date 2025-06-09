@@ -66,3 +66,23 @@ fn isSafeReport(numbers: []const u8) bool {
 
     return true; // All checks passed
 }
+
+// test isSafeReport 
+test "isSafeReport" {
+    // Test ascending sequences
+    try std.testing.expect(isSafeReport(&[_]u8{1, 2, 3}));
+    try std.testing.expect(isSafeReport(&[_]u8{1, 3, 4}));
+    try std.testing.expect(!isSafeReport(&[_]u8{1, 5, 6})); // Difference > 3
+    try std.testing.expect(!isSafeReport(&[_]u8{1, 2, 1})); // Direction change
+
+    // Test descending sequences
+    try std.testing.expect(isSafeReport(&[_]u8{5, 4, 3}));
+    try std.testing.expect(isSafeReport(&[_]u8{6, 4, 3}));
+    try std.testing.expect(!isSafeReport(&[_]u8{6, 2, 1})); // Difference > 3
+    try std.testing.expect(!isSafeReport(&[_]u8{5, 4, 5})); // Direction change
+
+    // Test edge cases
+    try std.testing.expect(isSafeReport(&[_]u8{1})); // Single number
+    try std.testing.expect(isSafeReport(&[_]u8{})); // Empty sequence
+    try std.testing.expect(!isSafeReport(&[_]u8{2, 2, 2})); // Equal numbers
+}
